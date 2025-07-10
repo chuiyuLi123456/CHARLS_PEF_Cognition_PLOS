@@ -262,42 +262,8 @@ colnames(step21)
 which(is.na(step2),arr.ind =TRUE)
 
 
-# 多重插补
-library(mice)
-imputed_data <- mice(step2, m = 5, method = "pmm", maxit = 50, seed = 500)
-step2 <- complete(imputed_data, 1)
-which(is.na(step21_imputed),arr.ind =TRUE)
-write.csv(step1, "一次多重插补.csv", row.names = FALSE)
-
-# 加载 mice 包
-library(mice)
-
 # 检查原始数据的缺失值情况
 summary(step21)
-
-# 对 step21 数据框进行多重插补，采用预测均值匹配方法
-imputed_data <- mice(step21, 
-                     m = 5,            # 生成 5 个插补数据集
-                     method = "pmm",   # 使用预测均值匹配方法
-                     maxit = 50,       # 最大迭代次数 50
-                     seed = 500)       # 设置随机种子以保证结果可重复
-
-# 查看插补过程中的诊断图（检查收敛情况等）
-plot(imputed_data)
-
-# 从生成的插补数据集中提取第一个完整的数据集
-step21_imputed <- complete(imputed_data, 1)
-
-# 检查插补后的数据缺失值情况
-summary(step21_imputed)
-
-
-
-
-
-
-
-
 
 
 colnames(step1)
